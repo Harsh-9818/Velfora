@@ -33,7 +33,7 @@ const CartDrawer = ({drawerOpen, toggleCartDrawer}) => {
         </p>
       </div>
     </div>
-  )
+  )   
 }
 
 export default CartDrawer
