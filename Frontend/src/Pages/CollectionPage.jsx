@@ -22,8 +22,10 @@ const CollectionPage = () => {
     // Add eventlistener for click
     document.addEventListener("mousedown", handleClickOutside);
     //Clean event listener
+    return () => {
     document.removeEventListener("mousedown", handleClickOutside);
-  });
+    }
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -101,7 +103,7 @@ const CollectionPage = () => {
         <h2 className="text-2xl uppercase mb-4">All Collections</h2>
         
         {/* Sort options */}
-        <SortOption/>
+          <SortOption/>
 
         {/* Product Grid */}
         <ProductGrid products={product}/>
