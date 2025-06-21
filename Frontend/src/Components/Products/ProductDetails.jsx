@@ -105,11 +105,13 @@ const ProductDetails = () => {
             {/* Main image */}
             <div className="md:w-1/2">
                 <div className="mb-4">
-                    <img
+                    {mainImage && (
+                        <img
                         src={mainImage}
                         alt="Main Product"
                         className="w-full h-auto object-cover rounded-lg"
                     />
+                    )}
                 </div>
             </div>
             {/* Mobile thumbnail */}
