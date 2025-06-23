@@ -36,7 +36,7 @@ router.post("/", protect, admin, async (req, res) => {
     });
 
     await user.save();
-    res.status(201).json({ message: "User created successfully" });
+    res.status(201).json({ user });
   } catch (error) {
     console.error("Error creating user:", error);
     res.status(500).json({ message: "Server error" });
@@ -73,7 +73,7 @@ router.delete("/:id", protect, admin, async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
       await user.deleteOne();
-      res.json({ message: "User removed successfully" });
+      res.json({ id: user._id});
     } else {
       res.status(404).json({ message: "User not found" });
     }

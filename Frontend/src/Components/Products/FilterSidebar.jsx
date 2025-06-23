@@ -54,7 +54,7 @@ const FilterSidebar = () => {
     "ChicStyle",
   ];
 
-  const genders = ["Men", "Female"]
+  const genders = ["Men", "Women"]
 
   useEffect(() => {
     const params = Object.fromEntries([...searchParams]);
@@ -140,7 +140,7 @@ const FilterSidebar = () => {
             type="radio"
             name="gender"
             value={gender}
-            onClick={handleFilterChange}
+            onChange={handleFilterChange}
             checked={filters.gender === gender}
             className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-600 border-gray-600"/>
             <span className="text-gray-700">{gender}</span>

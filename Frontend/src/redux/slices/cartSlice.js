@@ -19,7 +19,7 @@ export const fetchCart = createAsyncThunk(
   async ({ userId, guestId }, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.vite_BACKEND_URL}/api/cart`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         {
           params: { userId, guestId },
         }
@@ -41,7 +41,7 @@ export const addToCart = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.vite_BACKEND_URL}/api/cart`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         {
           productId,
           quantity,
@@ -66,8 +66,8 @@ export const updateCartItemQuantity = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.vite_BACKEND_URL}/api/cart`,
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         {
           productId,
           quantity,
@@ -91,7 +91,7 @@ export const removeFromCart = createAsyncThunk(
     try {
       const response = await axios({
         method: "DELETE",
-        url: `${import.meta.env.vite_BACKEND_URL}/api/cart`,
+        url: `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
         data: { productId, guestId, userId, size, color },
       });
       return response.data;
@@ -107,7 +107,7 @@ export const mergeCart = createAsyncThunk(
   async ({ guestId, user }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.vite_BACKEND_URL}/api/cart/merge`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart/merge`,
         { guestId, user },
         {
           headers: {

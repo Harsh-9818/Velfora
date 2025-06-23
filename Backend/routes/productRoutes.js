@@ -66,6 +66,10 @@ router.post("/", protect, admin, async (req, res) => {
 // @access Private/Admin
 router.put("/:id", protect, admin, async (req, res) => {
   try {
+    console.log("➡️ PUT request to /api/products/:id");
+    console.log("Product ID:", req.params.id);
+    console.log("Incoming productData:", req.body);
+
     const {
       name,
       description,
@@ -103,7 +107,7 @@ router.put("/:id", protect, admin, async (req, res) => {
       product.colors = colors || product.colors;
       product.collections = collections || product.collections;
       product.material = material || product.material;
-      product.gender = material || product.gender;
+      product.gender = gender || product.gender;
       product.images = images || product.images;
       product.isFeatured =
         isFeatured !== undefined ? isFeatured : product.isFeatured;
@@ -115,32 +119,25 @@ router.put("/:id", protect, admin, async (req, res) => {
       product.sku = sku || product.sku;
 
       //Save the updated product
-      const updatedProduct = await product.save();
-      res.json(updatedProduct);
+      try {
+        const updatedProduct = await product.save();
+        console.log("✅ Product updated:", updatedProduct);
+        res.json(updatedProduct);
+      } catch (saveError) {
+        console.error("❌ Error saving product:", saveError.message);
+        res.status(500).json({
+          message: "Failed to save product. Possible validation issue.",
+          error: saveError.message,
+        });
+      }
     } else {
+      console.log("❌ Product not found for ID:", req.params.id);
       res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
-    console.error("Error updating product:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error("❌ Error in update route:", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
-});
-
-// @route  DELETE /api/products/:id
-// @desc   delete a product by ID
-// @access Private/Admin
-router.delete("/:id", protect, admin, async (req, res) => {
-  try {
-    //Find the product by ID
-    const product = await Product.findById(req.params.id);
-    if (product) {
-      //Remove the product form DB
-      await product.deleteOne();
-      res.json({ message: "Product removed" });
-    } else {
-      res.status(404).json({ message: "Product not found" });
-    }
-  } catch (error) {}
 });
 
 // @route  GET /api/products
@@ -251,7 +248,7 @@ router.get("/best-seller", async (req, res) => {
     console.error("Error fetching best sellers:", error);
     res.status(500).json({ message: "Server error" });
   }
-}); 
+});
 
 //@route GET /api/products/new-arrivals
 //@desc  retrive latest 8 products added to the store
@@ -261,13 +258,11 @@ router.get("/new-arrivals", async (req, res) => {
     // Fetch the latest 8 products sorted by creation date
     const newArrivals = await Product.find().sort({ createdAt: -1 }).limit(8);
     res.json(newArrivals);
-
   } catch (error) {
     console.error("Error fetching new arrivals:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 // @route  GET /api/products/:id
 // @desc   get a single product by ID
@@ -291,12 +286,12 @@ router.get("/:id", async (req, res) => {
 // @desc   get similar products based on the current product's category and gender
 //@access Public
 router.get("/similar/:id", async (req, res) => {
-  const {id} = req.params;
-  
-  try{
+  const { id } = req.params;
+
+  try {
     const product = await Product.findById(id);
 
-    if(!product) {
+    if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
 
@@ -307,13 +302,10 @@ router.get("/similar/:id", async (req, res) => {
     }).limit(4);
 
     res.json(similarProducts);
-
-  } catch(error) {
+  } catch (error) {
     console.error("Error fetching similar products:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
-
-
 
 module.exports = router;
