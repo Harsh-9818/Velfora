@@ -17,12 +17,17 @@ const app = express();
 app.use(express.json());
 
 // ====== START CORS CONFIG FIX ======
-app.use(cors({
-  origin: ["https://velfora-ye9s.vercel.app", "http://localhost:5173"],
+const corsOptions = {
+  origin: [
+    "https://velfora-ye9s.vercel.app",  // your frontend
+    "http://localhost:5173",            // for local dev
+  ],
+  methods: "GET,POST,PUT,DELETE,PATCH",
+  allowedHeaders: "Content-Type,Authorization",
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+};
+
+app.use(cors(corsOptions));
 // ====== END CORS CONFIG FIX ======
 
 dotenv.config();
