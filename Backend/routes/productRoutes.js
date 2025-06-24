@@ -7,6 +7,7 @@ const router = express.Router();
 // @desc   create a new product
 // @access Private/Admin
 router.post("/", protect, admin, async (req, res) => {
+  console.log("🛠️ Incoming product data:", req.body);
   try {
     const {
       name,

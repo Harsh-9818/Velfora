@@ -73,7 +73,7 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    ispublished: {
+    isPublished: {
       type: Boolean,
       default: false,
     },
@@ -85,7 +85,7 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    tage: [String],
+    tags: [String],
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
