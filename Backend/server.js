@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db")
-const userRoutes = require("./routes/userRoutes")
+const connectDB = require("./config/db");
+const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const checkoutRoutes = require("./routes/checkoutRoutes");
@@ -15,7 +15,13 @@ const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// ====== START CORS CONFIG FIX ======
+app.use(cors({
+  origin: ["https://velfora-ye9s.vercel.app", "http://localhost:5173"],
+  credentials: true
+}));
+// ====== END CORS CONFIG FIX ======
 
 dotenv.config();
 
@@ -29,14 +35,13 @@ app.get("/", (req, res) => {
 });
 
 //Api Routes
-app.use ("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/checkout", checkoutRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/subscribe", subscriberRoutes);
-
 
 //Admin Routes
 app.use("/api/admin/users", adminRoutes);
