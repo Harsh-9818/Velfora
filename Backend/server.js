@@ -23,7 +23,7 @@ const corsOptions = {
     "http://localhost:5173",            // for local dev
   ],
   methods: "GET,POST,PUT,DELETE,PATCH",
-  allowedHeaders: "Content-Type,Authorization",
+  // allowedHeaders: "Content-Type,Authorization",
   credentials: true,
 };
 
