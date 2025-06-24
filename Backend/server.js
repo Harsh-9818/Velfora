@@ -19,7 +19,7 @@ app.use(express.json());
 // ====== START CORS CONFIG FIX ======
 const corsOptions = {
   origin: [
-    "https://velfora-ye9s.vercel.app",  // your frontend
+    "https://velforaclothing.vercel.app",  // your frontend
     "http://localhost:5173",            // for local dev
   ],
   methods: "GET,POST,PUT,DELETE,PATCH",
