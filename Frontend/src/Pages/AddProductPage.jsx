@@ -20,7 +20,7 @@ const AddProductPage = () => {
     colors: [],
     collections: "",
     material: "",
-    gender: "", // Dropdown now
+    gender: "",
     images: [],
   });
 
@@ -62,7 +62,7 @@ const AddProductPage = () => {
       }));
     } catch (err) {
       console.error("Upload error:", err);
-      alert("Image upload failed");
+      alert(err?.message || "Image upload failed");
     } finally {
       setUploading(false);
     }
@@ -75,8 +75,10 @@ const AddProductPage = () => {
       alert("Product created successfully");
       navigate("/admin/products");
     } catch (err) {
-      console.error(err);
-      alert("Failed to create product");
+      console.error("Product creation error:", err);
+      const message =
+        err?.data?.message || err?.message || "Something went wrong";
+      alert(message);
     }
   };
 
