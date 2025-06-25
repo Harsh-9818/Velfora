@@ -3,6 +3,7 @@ import { RiTwitterXLine } from "react-icons/ri"
 import { TbBrandMeta } from "react-icons/tb"
 import { Link } from "react-router-dom"
 import{FiPhoneCall} from "react-icons/fi"
+import { CiLinkedin } from "react-icons/ci";
 
 const Footer = () => {
   return (
@@ -90,15 +91,15 @@ const Footer = () => {
                 <h3 className="text-lg text-gray-800 mb-4">Follow Us</h3>
                 <div className="flex items-center space-x-4 mb-6">
                     <a
-                        href="https://facebook.com"
+                        href="https://www.linkedin.com/in/harshtanwar/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-gray-500"
                     >
-                        <TbBrandMeta className="h-4 w-4"/>
+                        <CiLinkedin className="h-4 w-4"/>
                     </a>
                     <a
-                        href="https://facebook.com"
+                        href="https://www.instagram.com/iamnotharsh/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-gray-500"
@@ -106,7 +107,7 @@ const Footer = () => {
                         <IoLogoInstagram className="h-4 w-4"/>
                     </a>
                     <a
-                        href="https://facebook.com"
+                        href="https://x.com/ezharsh"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-gray-500"
